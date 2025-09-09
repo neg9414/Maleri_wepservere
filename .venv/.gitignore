@@ -1,1 +1,17 @@
-* workspace/
+# Ignorer hele workspace-mappen
+workspace/
+
+# Typiske Python-ting
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtuelt miljø
+venv/
+.env
+
+# Editor-indstillinger
+.vscode/
+.idea/
