@@ -4,15 +4,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
+
+    <bar class="navebar">
+            <ul>
+                <li><a href="{{ url_for('login_profil') }}">Profil</a></li>
+                <li><a href="{{ url_for('forside') }}">Forside</a></li>
+            </ul>
+    </bar>
+
     <div class="App">
         <header class="App-header">
             <p>
                 Det her er søging
-            </p>
-            <p>
-                <a href="{{ url_for('login_profil') }}">Profil</a>
-                <a href="{{ url_for('forside') }}">Forside</a>
-                <a href="{{ url_for('docs') }}">Dokumentation</a>
             </p>
         </header>
     </div>

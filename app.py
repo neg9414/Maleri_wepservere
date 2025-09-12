@@ -18,5 +18,9 @@ def search():
 def docs():
     return render_template("docs.html")
 
+@app.route("/farvoritter")
+def farvoritter():
+    return render_template("farvoritter.html")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

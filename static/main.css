@@ -29,12 +29,10 @@ code {
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: rgb(47, 3, 3);
+    color: rgb(57, 10, 10);
 }
 
-.App-link {
-    color: #ff0000;
-}
+
 
 .heart {
     color: #ff0000;
@@ -42,4 +40,32 @@ code {
 
 .small {
     font-size: 0.75rem;
+}
+
+
+/* menu, navnebar */
+
+.navebar a {
+    display: block;
+    color: #714a4a;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effekt */
+.navebar a:hover {
+    color: #311414;          
+}
+
+.navebar li {
+    flex: 1;
+}
+
+.navebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
