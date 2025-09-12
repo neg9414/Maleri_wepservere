@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="App">
+        <header class="App-header">
+            <p>
+                Det her er søging
+            </p>
+            <p>
+                <a href="{{ url_for('login_profil') }}">Profil</a>
+                <a href="{{ url_for('forside') }}">Forside</a>
+                <a href="{{ url_for('docs') }}">Dokumentation</a>
+            </p>
+        </header>
+    </div>
+</body>
+
+</html>
