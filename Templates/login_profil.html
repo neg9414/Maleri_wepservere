@@ -2,15 +2,27 @@
 <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>   
 
-    <bar class="navebar">
-            <ul>
-                <li><a href="{{ url_for('forside') }}">Forside</a></li>
-                <li><a href="{{ url_for('farvoritter') }}">Farvoritter</a></li>
-            </ul>
-    </bar>
+    <nav class="navebar">
+        <ul>
+            <li class="left">
+                <a href="{{ url_for('forside') }}">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </li>
+
+            <div class="right">
+                <li>
+                    <a href="{{ url_for('farvoritter') }}">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </nav>
 
     <div class="App">
         <header class="App-header">
