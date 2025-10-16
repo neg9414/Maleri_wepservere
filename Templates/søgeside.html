@@ -4,6 +4,7 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
 </head>
 <body>
 
@@ -38,29 +39,27 @@
             <button type="submit">Søg</button>
         </form>
 
-        {% if resultater is not none and not resultater.resultater %}
-            <p class="no-results">Ingen resultater fundet.</p>
-        {% endif %}
-
+        {% if resultater is not none and resultater.resultater %}
             <div class="results">
-                {% for resultater in resultater.resultater %}
-                
+                {% for result in resultater.resultater %}
                     <div class="result-card">
-                        <i class="fa-regular fa-heart heart-btn" data-id="{{ resultater.id }}"></i>
+                        <i class="fa-regular fa-heart heart-btn" data-id="{{ result.id }}"></i>
 
-                        <a href="{{ url_for('maleri_detail', artwork_id=resultater.id) }}" class="result-link">
-                            {% if resultater.image %}
-                                <img src="{{ resultater.image }}" alt="{{ resultater.painting }}">
+                        <a href="{{ url_for('maleri_detail', artwork_id=result.id) }}" class="result-link">
+                            {% if result.image %}
+                                <img src="{{ result.image }}" alt="{{ result.painting }}">
                             {% endif %}
                             <div class="result-content">
-                            <h3>{{ resultater.painting }}</h3>
-                            <p><strong>Artist:</strong> {{ resultater.artist }}</p>
-                            <p><strong>Year:</strong> {{ resultater.year }}</p>
-                            <p><strong>Genre:</strong> {{ resultater.genre }}</p>
+                                <h3>{{ result.painting }}</h3>
+                                <p><strong>Artist:</strong> {{ result.artist }}</p>
+                            </div>
                         </a>
                     </div>
                 {% endfor %}
             </div>
+        {% elif resultater is not none %}
+            <p class="no-results">Ingen resultater fundet.</p>
+        {% endif %}
     </div>
 
     <script>

@@ -94,13 +94,12 @@ def søgeside():
 
 def søg_i_db(søgeord):
     db = hent_db_genes()
-    cur = db.execute("""
-        SELECT id, painting, artist, year, genre, image, beskrivelse
-        FROM artworks
-        WHERE painting LIKE ? OR artist LIKE ? OR year LIKE ? OR genre LIKE ? OR beskrivelse LIKE ?
-    """, tuple(['%' + søgeord + '%'] * 5))
+    cur = db.execute(""" SELECT id, painting, artist, year, genre, image, beskrivelse FROM artworks WHERE painting LIKE ? OR artist LIKE ? OR year LIKE ? OR genre LIKE ? OR beskrivelse LIKE ? """, tuple(['%' + søgeord + '%'] * 5))
     data = cur.fetchall()
-    resultater = {"resultater": [dict(r) for r in data]}
+    if not data:
+        resultater = None
+    else:
+        resultater = {"resultater": [dict(r) for r in data]}
     return render_template("søgeside.html", title="Kunstgalleri", resultater=resultater)
 
 

@@ -31,7 +31,6 @@ code {
 .navebar {
     background-color: #efe8e1;
     padding: 8px 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .navebar ul {
@@ -212,7 +211,7 @@ code {
     display: flex;
     gap: 10px;
     margin: 30px auto;
-    max-width: 700px;
+    max-width: 900px;
     width: 100%;
 }
 
@@ -220,6 +219,7 @@ code {
 .result-card {
     position: relative;
     cursor: pointer;
+    max-width: 900px;
 }
 
 .result-card .result-link {
@@ -231,9 +231,9 @@ code {
 }
 
 .result-card img {
-    width: 250px;
+    width: 900px;
     height: auto;
-    border-radius: 15px;
+    border-radius: 900px;
     margin-bottom: 15px;
 }
 
@@ -269,16 +269,16 @@ code {
 /* 🧩 RESULTATER / KORTVISNING    */
 /* ------------------------------ */
 .results {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 25px;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
+    align-items: left; 
 }
 
 .result-card {
-    position: relative;
     display: flex;
     background-color: #fff;
     padding: 20px;
@@ -287,6 +287,7 @@ code {
     transition: transform 0.2s, box-shadow 0.2s;
     align-items: flex-start;
     gap: 15px;
+    width: 900px;
 }
 
 .result-card:hover {
