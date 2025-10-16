@@ -1,0 +1,50 @@
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navebar">
+        <ul>
+            <li class="left">
+                <a href="{{ url_for('forside') }}">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="App">
+    <header class="App-header">
+        <h2>Login eller opret profil</h2>
+
+        {% if fejl %}
+        <div id="toast" onclick="this.style.display='none'">{{ fejl }}</div>
+        {% endif %}
+
+        <div class="login-container">
+            <form method="post" class="login-form">
+                <input type="hidden" name="form_type" value="login">
+                <h3>Login</h3>
+                <input type="text" name="username" placeholder="Brugernavn" required>
+                <input type="password" name="password" placeholder="Kodeord" required>
+                <button type="submit">Login</button>
+            </form>
+
+            <form method="post" class="signup-form">
+                <input type="hidden" name="form_type" value="signup">
+                <h3>Opret profil</h3>
+                <input type="text" name="username" placeholder="Brugernavn" required>
+                <input type="password" name="password" placeholder="Kodeord" required>
+                <button type="submit">Opret</button>
+            </form>
+        </div>
+    </header>
+</div>
+
+</body>
+</html>

@@ -3,45 +3,53 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
 
+<body>
     <nav class="navebar">
         <ul>
-
             <li class="left">
                 <a href="{{ url_for('søgeside') }}">
-                    <i class="fas fa-search"></i> Søg
+                    <i class="fas fa-search"></i> &nbsp; Søg
                 </a>
             </li>
-
-
             <div class="right">
-                <li>
-                    <a href="{{ url_for('login_profil') }}">
-                        <i class="fas fa-user"></i>
-                    </a>
-                </li>
+                <li><a href="{{ url_for('login') }}"><i class="fas fa-user"></i></a></li>
                 <span class="divider"></span>
-                <li>
-                    <a href="{{ url_for('docs') }}">
-                        <i class="fas fa-book"></i>
-                    </a>
-                </li>
+                <li><a href="{{ url_for('docs') }}"><i class="fas fa-book"></i></a></li>
             </div>
         </ul>
     </nav>
 
-    <div class="App">
-        <header class="App-header">
-            <p>
-                Hello dette er min webserver <span class="heart">♥️</span>
-            </p>
-            <p class="small">
-                Her kan du søge på malerier! (๑'ᵕ'๑)⸝*
-            </p>
-        </header>
-    </div>
-</body>
+    <main class="homepage">
+        <section class="welcome-section">
+            {% if session.user %}
+                <h1>Hej {{ session.user }} velkommen</h1>
+                <p class="intro">Velkommen tilbage til <strong>ArtGallery</strong> – dit digitale galleri.<br>
+                Her kan du udforske klassiske og moderne mesterværker.</p>
+            {% else %}
+                <h1 class="daily-title">Velkommen til Æbels-Kunstgalleri </h1>
+                <p class="intro">Opret en profil for at gemme dine yndlingsværker og skabe dit eget galleri.</p>
+            {% endif %}
+            <p class="under-construction"> Denne hjemmeside er stadig under opbygning, vi arbejder på at udvide vores samling løbende!</p>
 
+            <br><br>
+
+            <h2 class="daily-title">Dagens maleri:</h2>
+            <div class="daily-art">
+                {% if dagens_maleri['image'] %}
+                    <img src="{{ url_for('static', filename='images/' + dagens_maleri.image) }}" alt="{{ dagens_maleri.painting }}">
+                {% endif %}
+                <div class="daily-art-info">
+                    <h3>{{ dagens_maleri.painting }}</h3>
+                    <p><strong>Kunstner:</strong> {{ dagens_maleri.artist }}</p>
+                    <p><strong>Genre:</strong> {{ dagens_maleri.genre }}</p>
+                    <p class="description">{{ dagens_maleri.beskrivelse }}</p>
+                </div>
+            </div>
+    </main>
+</body>
 </html>
+
+

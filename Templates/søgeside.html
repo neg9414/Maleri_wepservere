@@ -1,5 +1,6 @@
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -8,13 +9,11 @@
 
     <nav class="navebar">
         <ul>
-
             <li class="left">
                 <a href="{{ url_for('forside') }}">
                     <i class="fas fa-arrow-left"></i>
                 </a>
             </li>
-
 
             <div class="right">
                 <li>
@@ -22,27 +21,70 @@
                         <i class="fas fa-heart"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url_for('login') }}">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
             </div>
         </ul>
     </nav>
 
-    <div class="App">
-        <header class="App-header">
-            <p>Det her er søging</p>
+    <div class="homepage">
+        <h2 class="daily-title">Søg efter malerier</h2>
 
-            <form method="post" action="">
-                <input type="text" name="søgeord" placeholder="Søg..." required>
-                <button type="submit">Search</button>
-            </form>
-            {% if not resultater.resultater %}
-                <p>Ingen resultater fundet.</p>
-            {% endif %}
-            <ul>
+        <form method="post" action="" class="search-form">
+            <input type="text" name="søgeord" placeholder="Søg..." required>
+            <button type="submit">Søg</button>
+        </form>
+
+        {% if resultater is not none and not resultater.resultater %}
+            <p class="no-results">Ingen resultater fundet.</p>
+        {% endif %}
+
+            <div class="results">
                 {% for resultater in resultater.resultater %}
-                <li>{{ resultater.painting }} ({{ resultater.artist }}) - {{ resultater.year }}</li>
+                
+                    <div class="result-card">
+                        <i class="fa-regular fa-heart heart-btn" data-id="{{ resultater.id }}"></i>
+
+                        <a href="{{ url_for('maleri_detail', artwork_id=resultater.id) }}" class="result-link">
+                            {% if resultater.image %}
+                                <img src="{{ resultater.image }}" alt="{{ resultater.painting }}">
+                            {% endif %}
+                            <div class="result-content">
+                            <h3>{{ resultater.painting }}</h3>
+                            <p><strong>Artist:</strong> {{ resultater.artist }}</p>
+                            <p><strong>Year:</strong> {{ resultater.year }}</p>
+                            <p><strong>Genre:</strong> {{ resultater.genre }}</p>
+                        </a>
+                    </div>
                 {% endfor %}
-                </ul>
-        </header>
+            </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.heart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('filled');
+                btn.classList.toggle('fa-regular');
+                btn.classList.toggle('fa-solid');
+            });
+        });
+
+        function saveNote(id) {
+            const box = document.getElementById(`notes-${id}`);
+            const textArea = box.querySelector('textarea');
+            const text = textArea.value.trim();
+
+            if (text) {
+                const newNote = document.createElement('div');
+                newNote.classList.add('note');
+                newNote.textContent = text;
+                box.insertBefore(newNote, box.firstChild);
+                textArea.value = "";
+            }
+        }
+    </script>
 </body>
 </html>

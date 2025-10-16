@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navebar">
+        <ul>
+            <li class="left">
+                <a href="{{ url_for('forside') }}">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <h2>{{ maleri.painting }}</h2>
+    <img src="{{ maleri.image }}" alt="{{ maleri.painting }}">
+    <p><strong>Artist:</strong> {{ maleri.artist }}</p>
+    <p><strong>Year:</strong> {{ maleri.year }}</p>
+    <p><strong>Genre:</strong> {{ maleri.genre }}</p>
+    <p><strong>Description:</strong> {{ maleri.beskrivelse }}</p>
+
+    <div class="note-box" id="notes-{{ maleri.id }}">
+        <div class="note">
+            <textarea placeholder="Skriv en note..."></textarea>
+            <button type="button" onclick="saveNote('{{ maleri.id }}')">Gem note</button>
+        </div>
+    </div>
+</body>
+
+</html>
