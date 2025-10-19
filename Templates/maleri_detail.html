@@ -18,7 +18,7 @@
     </nav>
 
     <h2>{{ maleri.painting }}</h2>
-    <img src="{{ maleri.image }}" alt="{{ maleri.painting }}">
+    <img src="{{ url_for('static', filename='images/' + maleri.image) }}" alt="{{ maleri.painting }}">
     <p><strong>Artist:</strong> {{ maleri.artist }}</p>
     <p><strong>Year:</strong> {{ maleri.year }}</p>
     <p><strong>Genre:</strong> {{ maleri.genre }}</p>

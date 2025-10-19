@@ -25,12 +25,12 @@
 
     <main class="homepage">
         <section class="welcome-section">
-            {% if session.user %}
-                <h1>Hej {{ session.user }} velkommen</h1>
-                <p class="intro">Velkommen tilbage til <strong>ArtGallery</strong> – dit digitale galleri.<br>
+            {% if session.username %}
+                <h1 class="daily-title"> Hej <i>{{ session.username }}</i> velkommen</h1>
+                <p class="intro">Velkommen tilbage til <strong>Æbels-Kunstgalleri</strong>, dit digitale galleri.<br>
                 Her kan du udforske klassiske og moderne mesterværker.</p>
             {% else %}
-                <h1 class="daily-title">Velkommen til Æbels-Kunstgalleri </h1>
+                <h1 class="daily-title">Velkommen til <strong>Æbels-Kunstgalleri</strong> </h1>
                 <p class="intro">Opret en profil for at gemme dine yndlingsværker og skabe dit eget galleri.</p>
             {% endif %}
             <p class="under-construction"> Denne hjemmeside er stadig under opbygning, vi arbejder på at udvide vores samling løbende!</p>

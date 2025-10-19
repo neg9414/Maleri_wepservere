@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, g, session, redirect, url_for, make_response
+from flask import Flask, request, render_template, g, session, redirect, url_for, make_response, flash, get_flashed_messages
 from datetime import date
 import sqlite3, random
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "hemmelig_nøgle"
@@ -38,46 +39,47 @@ def forside():
     return render_template("forside.html", title="Kunstgalleri", dagens_maleri=dagens_maleri)
 
 # -------------------- LOGIN / OPRET --------------------
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    fejl = None
     db = hent_db_genes()
 
+    # Hvis brugeren allerede er logget ind
+    if "username" in session:
+        return render_template("login.html", already_logged_in=True, username=session["username"])
+
+    fejl = None
     if request.method == "POST":
         form_type = request.form.get("form_type")
+        username = request.form["username"].strip()
+        password = request.form["password"]
 
         if form_type == "login":
-            username = request.form["username"]
-            password = request.form["password"]
-
-            cur = db.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+            cur = db.execute("SELECT * FROM users WHERE username=?", (username,))
             user = cur.fetchone()
-
-            if user:
+            if user and check_password_hash(user["password"], password):
                 session["user_id"] = user["id"]
                 session["username"] = user["username"]
                 return redirect(url_for("forside"))
             else:
-                fejl = "Forkert brugernavn eller kodeord"
+                fejl = "Forkert brugernavn eller kodeord."
 
         elif form_type == "signup":
-            username = request.form["username"]
-            password = request.form["password"]
-
-            try:
-                db.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            cur = db.execute("SELECT * FROM users WHERE username=?", (username,))
+            if cur.fetchone():
+                fejl = "Brugernavn findes allerede."
+            else:
+                hashed_pw = generate_password_hash(password)
+                db.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_pw))
                 db.commit()
                 cur = db.execute("SELECT * FROM users WHERE username=?", (username,))
                 user = cur.fetchone()
                 session["user_id"] = user["id"]
                 session["username"] = user["username"]
                 return redirect(url_for("forside"))
-            except sqlite3.IntegrityError:
-                fejl = "Brugernavn findes allerede"
 
-    return render_template("login.html", title="Kunstgalleri", fejl=fejl)
+    return render_template("login.html", fejl=fejl, title="Kunstgalleri")
 
+# -------------------- LOGOUT --------------------
 @app.route("/logout")
 def logout():
     session.clear()

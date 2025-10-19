@@ -47,11 +47,11 @@
 
                         <a href="{{ url_for('maleri_detail', artwork_id=result.id) }}" class="result-link">
                             {% if result.image %}
-                                <img src="{{ result.image }}" alt="{{ result.painting }}">
+                                <img src="{{ url_for('static', filename='images/' + result.image) }}" alt="{{ result.painting }}">
                             {% endif %}
                             <div class="result-content">
                                 <h3>{{ result.painting }}</h3>
-                                <p><strong>Artist:</strong> {{ result.artist }}</p>
+                                <p><strong>Kunstner:</strong> {{ result.artist }}</p>
                             </div>
                         </a>
                     </div>

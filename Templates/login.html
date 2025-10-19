@@ -8,7 +8,6 @@
     <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
 </head>
 <body>
-
     <nav class="navebar">
         <ul>
             <li class="left">
@@ -18,34 +17,51 @@
             </li>
         </ul>
     </nav>
+<body>
 
-<div class="App">
-    <header class="App-header">
-        <h2>Login eller opret profil</h2>
+    <div class="login-container">
 
-        {% if fejl %}
-        <div id="toast" onclick="this.style.display='none'">{{ fejl }}</div>
-        {% endif %}
+        {% if already_logged_in %}
+            <h2>Hej {{ username }}, du er allerede logget ind.</h2>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Log ud</a>
 
-        <div class="login-container">
-            <form method="post" class="login-form">
+        {% else %}
+            {% if fejl %}
+                <div class="error-msg">{{ fejl }}</div>
+            {% endif %}
+
+            <!-- LOGIN FORM -->
+            <form method="post" class="login-form" id="login-form">
                 <input type="hidden" name="form_type" value="login">
-                <h3>Login</h3>
+                <h3 class="daily-title-1"> Login her hvis du har en profil</h3>
                 <input type="text" name="username" placeholder="Brugernavn" required>
                 <input type="password" name="password" placeholder="Kodeord" required>
                 <button type="submit">Login</button>
             </form>
 
-            <form method="post" class="signup-form">
+            <!-- LILLE LINK TIL OPRET -->
+            <p class="signup-link">Har du ikke en konto? <span id="show-signup">Opret</span></p>
+
+            <!-- SIGNUP FORM -->
+            <form method="post" class="signup-form" id="signup-form" style="display:none;">
                 <input type="hidden" name="form_type" value="signup">
-                <h3>Opret profil</h3>
+                <h3 class="daily-title-1"> Opret profil her:</h3>
                 <input type="text" name="username" placeholder="Brugernavn" required>
                 <input type="password" name="password" placeholder="Kodeord" required>
                 <button type="submit">Opret</button>
             </form>
-        </div>
-    </header>
-</div>
+        {% endif %}
+    </div>
 
+    <script>
+        document.getElementById("show-signup").addEventListener("click", function() {
+            // Skjul login-formen
+            document.getElementById("login-form").style.display = "none";
+            // Skjul linket “Har du ikke en konto?”
+            this.parentElement.style.display = "none";
+            // Vis signup-formen
+            document.getElementById("signup-form").style.display = "block";
+        });
+    </script>
 </body>
 </html>
