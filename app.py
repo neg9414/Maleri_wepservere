@@ -4,7 +4,6 @@ import sqlite3, random
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = "hemmelig_nøgle"
 DB_FILE = "C:/Users/Lenovo/OneDrive - EUC Nordvestsjælland/1. Mine ting/Programmering B/Python/Database_wepservere/artworks.db"
 
 # -------------------- DATABASE --------------------
