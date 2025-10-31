@@ -5,7 +5,7 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="png">
 </head>
 <body>
     <nav class="navebar">
@@ -17,7 +17,6 @@
             </li>
         </ul>
     </nav>
-<body>
 
     <div class="login-container">
 
@@ -29,8 +28,7 @@
             {% if fejl %}
                 <div class="error-msg">{{ fejl }}</div>
             {% endif %}
-
-            <!-- LOGIN FORM -->
+            
             <form method="post" class="login-form" id="login-form">
                 <input type="hidden" name="form_type" value="login">
                 <h3 class="daily-title-1"> Login her hvis du har en profil</h3>
@@ -39,10 +37,8 @@
                 <button type="submit">Login</button>
             </form>
 
-            <!-- LILLE LINK TIL OPRET -->
             <p class="signup-link">Har du ikke en konto? <span id="show-signup">Opret</span></p>
 
-            <!-- SIGNUP FORM -->
             <form method="post" class="signup-form" id="signup-form" style="display:none;">
                 <input type="hidden" name="form_type" value="signup">
                 <h3 class="daily-title-1"> Opret profil her:</h3>
@@ -55,11 +51,8 @@
 
     <script>
         document.getElementById("show-signup").addEventListener("click", function() {
-            // Skjul login-formen
             document.getElementById("login-form").style.display = "none";
-            // Skjul linket “Har du ikke en konto?”
             this.parentElement.style.display = "none";
-            // Vis signup-formen
             document.getElementById("signup-form").style.display = "block";
         });
     </script>

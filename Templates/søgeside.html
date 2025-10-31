@@ -4,10 +4,10 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="png">
 </head>
-<body>
 
+<body>
     <nav class="navebar">
         <ul>
             <li class="left">
@@ -17,11 +17,6 @@
             </li>
 
             <div class="right">
-                <li>
-                    <a href="{{ url_for('farvoritter') }}">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                </li>
                 <li>
                     <a href="{{ url_for('login') }}">
                         <i class="fas fa-user"></i>
@@ -43,8 +38,6 @@
             <div class="results">
                 {% for result in resultater.resultater %}
                     <div class="result-card">
-                        <i class="fa-regular fa-heart heart-btn" data-id="{{ result.id }}"></i>
-
                         <a href="{{ url_for('maleri_detail', artwork_id=result.id) }}" class="result-link">
                             {% if result.image %}
                                 <img src="{{ url_for('static', filename='images/' + result.image) }}" alt="{{ result.painting }}">
@@ -61,29 +54,6 @@
             <p class="no-results">Ingen resultater fundet.</p>
         {% endif %}
     </div>
-
-    <script>
-        document.querySelectorAll('.heart-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.classList.toggle('filled');
-                btn.classList.toggle('fa-regular');
-                btn.classList.toggle('fa-solid');
-            });
-        });
-
-        function saveNote(id) {
-            const box = document.getElementById(`notes-${id}`);
-            const textArea = box.querySelector('textarea');
-            const text = textArea.value.trim();
-
-            if (text) {
-                const newNote = document.createElement('div');
-                newNote.classList.add('note');
-                newNote.textContent = text;
-                box.insertBefore(newNote, box.firstChild);
-                textArea.value = "";
-            }
-        }
-    </script>
 </body>
+
 </html>

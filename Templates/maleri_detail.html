@@ -3,10 +3,10 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="png">
 </head>
-<body>
 
+<body>
     <nav class="navebar">
         <ul>
             <li class="left">
@@ -17,17 +17,16 @@
         </ul>
     </nav>
 
-    <h2>{{ maleri.painting }}</h2>
-    <img src="{{ url_for('static', filename='images/' + maleri.image) }}" alt="{{ maleri.painting }}">
-    <p><strong>Artist:</strong> {{ maleri.artist }}</p>
-    <p><strong>Year:</strong> {{ maleri.year }}</p>
-    <p><strong>Genre:</strong> {{ maleri.genre }}</p>
-    <p><strong>Description:</strong> {{ maleri.beskrivelse }}</p>
-
-    <div class="note-box" id="notes-{{ maleri.id }}">
-        <div class="note">
-            <textarea placeholder="Skriv en note..."></textarea>
-            <button type="button" onclick="saveNote('{{ maleri.id }}')">Gem note</button>
+    <div class="detail-container">
+        <div class="detail-image">
+            <img src="{{ url_for('static', filename='images/' + maleri.image) }}" alt="{{ maleri.painting }}">
+        </div>
+        <div class="detail-info">
+            <h2>{{ maleri.painting }}</h2>
+            <h3>{{ maleri.artist }}</h3>
+            <p><strong>År:</strong> {{ maleri.year }}</p>
+            <p><strong>Genre:</strong> {{ maleri.genre }}</p>
+            <p class="description"><strong>Beskrivelse:</strong> {{ maleri.beskrivelse }}</p>
         </div>
     </div>
 </body>

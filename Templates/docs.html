@@ -3,7 +3,7 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='appel_logo.png') }}" type="png">
 </head>
 <body>
 
@@ -17,13 +17,30 @@
         </ul>
     </nav>
 
-    <div class="App">
+    <div class="detail-container">
+        <div class="detail-image">
+            <h2>Generel beskrivelse af kode og struktur</h2>
+            <p>
+                Hjemmesiden er bygget op med <strong>Flask</strong> som backend og <strong>Jinja2</strong> templates til at 
+                vise indholdet. Flask står for logikken og håndterer forbindelsen mellem databasen og HTML-siderne.
+            </p>
+            <p>
+                I HTML-filerne bruges til at vise data som Flask sender med for 
+                eksempel billeder, tekst eller informationer om brugeren. Jeg anvender også 
+                <code>url_for()</code> til at linke mellem sider.
+            </p>
+            <p>
+                Samlet set fungerer hjemmesiden gennem et samspil mellem Flask som der styrer data og funktioner 
+                og HTML/CSS, der står for udseendet. Det betyder, at alt indhold kan opdateres og vises dynamisk, 
+                alt efter hvad der sker i databasen og brugernes handlinger.
+            </p>
+        </section>
+
         <header class="App-header">
             <p>
-                Her kan du se hvad jeg har lavet, jeg har ikke tid
+                Her kan du se en generel forklaring på hvordan min hjemmeside og kode virker.
             </p>
         </header>
     </div>
 </body>
-
 </html>
